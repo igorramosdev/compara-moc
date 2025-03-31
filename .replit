@@ -54,3 +54,7 @@ run = ["sh", "-c", "npx next dev -p 5000"]
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[auth]
+pageEnabled = false
+buttonEnabled = false
