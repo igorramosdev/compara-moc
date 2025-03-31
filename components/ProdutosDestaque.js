@@ -111,16 +111,12 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
       <div className="relative mx-2 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800 p-4">
         <div className="flex space-x-4 overflow-x-scroll scrollbar-hide pb-2">
           {[...Array(3)].map((_, index) => (
-            <div key={index} className="flex-shrink-0 w-[280px] h-[180px] bg-white dark:bg-gray-700 rounded-lg shadow">
-              <div className="p-4 h-full flex flex-col">
-                <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-3/4 mb-4"></div>
-                <div className="h-8 bg-gray-200 dark:bg-gray-600 rounded w-1/2 mb-2"></div>
-                <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-full mb-6"></div>
-                <div className="mt-auto flex justify-between">
-                  <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-1/4"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-1/4"></div>
-                </div>
-              </div>
+            <div key={index} className="flex-shrink-0 w-[280px]">
+              <SkeletonLoader 
+                type="preco-card"
+                count={1}
+                className="h-[180px]"
+              />
             </div>
           ))}
         </div>
@@ -207,24 +203,7 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
         </>
       )}
 
-      {/* Indicadores */}
-      {produtosComMenorPreco.length > itemsPerView && (
-        <div className="flex justify-center mt-4 space-x-1">
-          {Array.from({ length: Math.ceil(produtosComMenorPreco.length / itemsPerView) }).map((_, idx) => {
-            const isActive = Math.floor(currentIndex / itemsPerView) === idx;
-            return (
-              <span 
-                key={idx} 
-                className={`h-2 rounded-full transition-all ${
-                  isActive 
-                    ? 'w-6 bg-blue-600 dark:bg-blue-500' 
-                    : 'w-2 bg-gray-300 dark:bg-gray-600'
-                }`}
-              />
-            );
-          })}
-        </div>
-      )}
+      {/* Indicadores removidos conforme solicitado */}
     </div>
   );
 };
