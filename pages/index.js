@@ -122,7 +122,7 @@ export default function Home({ precos, bairros, cidades }) {
           },
           "publisher": {
             "@type": "Organization",
-            "name": "Preços Montes Claros",
+            "name": "Compara Moc",
             "logo": {
               "@type": "ImageObject",
               "url": `${process.env.NEXT_PUBLIC_SITE_URL}/icons/icon-512x512.png`
@@ -163,7 +163,7 @@ export default function Home({ precos, bairros, cidades }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "Preços Montes Claros",
+              "name": "Compara Moc",
               "description": "Plataforma comunitária de comparação de preços em Montes Claros-MG",
               "url": process.env.NEXT_PUBLIC_SITE_URL,
               "logo": `${process.env.NEXT_PUBLIC_SITE_URL}/icons/icon-512x512.png`,

@@ -100,7 +100,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 text-blue-300">Compara MoC</h3>
+            <h3 className="text-xl font-bold mb-4 text-blue-300">Compara Moc</h3>
             <p className="text-gray-300 mb-4 text-sm leading-relaxed">
               O Compara MoC ajuda você a encontrar os melhores
               preços de produtos essenciais em Montes Claros. Economize tempo e dinheiro.
@@ -160,7 +160,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-700 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {currentYear} Compara MoC - Montes Claros. Todos os direitos reservados.
+            © {currentYear} Compara Moc - Montes Claros. Todos os direitos reservados.
           </p>
           
           <div className="flex items-center space-x-4">

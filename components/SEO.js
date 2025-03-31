@@ -24,7 +24,7 @@ const SEO = ({
   children 
 }) => {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:5000';
-  const pageTitle = title ? `${title} | Compara MoC` : 'Compara MoC - Compare preços em Montes Claros';
+  const pageTitle = title ? `${title} | Compara Moc` : 'Compara Moc - Compare preços em Montes Claros';
   const pageDescription = description || 'Compare preços de produtos essenciais em Montes Claros-MG e economize no seu dia a dia. Gasolina, gás de cozinha, alimentos e mais atualizados pela comunidade local.';
   const pageCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
   const pageOgImage = ogImage || `${siteUrl}/icons/icon-512x512.png`;
@@ -49,7 +49,7 @@ const SEO = ({
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-      <meta name="apple-mobile-web-app-title" content="Compara MoC" />
+      <meta name="apple-mobile-web-app-title" content="Compara Moc" />
       
       {/* Ícones para diferentes plataformas */}
       <link rel="icon" href="/favicon.ico" />
@@ -64,7 +64,7 @@ const SEO = ({
       <meta property="og:description" content={pageDescription} />
       <meta property="og:url" content={pageCanonical} />
       <meta property="og:image" content={pageOgImage} />
-      <meta property="og:site_name" content="Compara MoC" />
+      <meta property="og:site_name" content="Compara Moc" />
       <meta property="og:locale" content="pt_BR" />
       
       {/* Twitter */}

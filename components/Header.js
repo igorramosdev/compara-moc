@@ -45,7 +45,7 @@ const Header = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold">Compara MoC</h1>
+                <h1 className="text-xl font-bold">Compara Moc</h1>
                 <p className="text-xs text-blue-100 font-light">Montes Claros - MG</p>
               </div>
             </a>
