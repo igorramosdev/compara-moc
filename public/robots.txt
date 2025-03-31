@@ -1,0 +1,9 @@
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Block specific folders
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://precos-montes-claros.vercel.app/sitemap.xml
