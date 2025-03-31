@@ -1,17 +1,21 @@
+
 {
-  "name": "workspace",
+  "name": "compara-moc",
   "version": "1.0.0",
   "main": "postcss.config.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Comparador de preços para Montes Claros",
   "dependencies": {
     "@supabase/supabase-js": "^1.35.7",
     "autoprefixer": "^10.4.21",
