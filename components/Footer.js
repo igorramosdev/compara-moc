@@ -102,7 +102,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4 text-blue-300">Compara Moc</h3>
             <p className="text-gray-300 mb-4 text-sm leading-relaxed">
-              O Compara MoC ajuda você a encontrar os melhores
+              O Compara Moc ajuda você a encontrar os melhores
               preços de produtos essenciais em Montes Claros. Economize tempo e dinheiro.
             </p>
           </div>
