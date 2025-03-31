@@ -23,6 +23,6 @@
   "env": {
     "NEXT_PUBLIC_SUPABASE_URL": "https://sua-url-do-supabase.supabase.co",
     "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sua-chave-anonima-aqui",
-    "NEXT_PUBLIC_SITE_URL": "https://compara-moc.vercel.app"
+    "NEXT_PUBLIC_SITE_URL": "https://comparamoc.vercel.app"
   }
 }
