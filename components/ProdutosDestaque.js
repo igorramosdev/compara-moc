@@ -43,6 +43,74 @@ const identificarCategoria = (nomeProduto) => {
   return 'Outros';
 };
 
+// Ícones de categorias para melhor consistência visual
+const CATEGORY_ICONS = {
+  'Combustível': (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l.867 12.143A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    </svg>
+  ),
+  'Alimentos': (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+  ),
+  'Higiene': (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+    </svg>
+  ),
+  'Limpeza': (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+    </svg>
+  ),
+  'Bebidas': (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+    </svg>
+  ),
+  'Outros': (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+    </svg>
+  )
+};
+
+// Cores de categorias para consistência visual
+const CATEGORY_COLORS = {
+  'Combustível': {
+    bg: 'bg-red-100 dark:bg-red-900/50',
+    text: 'text-red-600 dark:text-red-300',
+    tagBg: 'bg-red-500 dark:bg-red-600'
+  },
+  'Alimentos': {
+    bg: 'bg-green-100 dark:bg-green-900/50',
+    text: 'text-green-600 dark:text-green-300',
+    tagBg: 'bg-green-500 dark:bg-green-600'
+  },
+  'Higiene': {
+    bg: 'bg-purple-100 dark:bg-purple-900/50',
+    text: 'text-purple-600 dark:text-purple-300',
+    tagBg: 'bg-purple-500 dark:bg-purple-600'
+  },
+  'Limpeza': {
+    bg: 'bg-yellow-100 dark:bg-yellow-900/50',
+    text: 'text-yellow-600 dark:text-yellow-300',
+    tagBg: 'bg-yellow-500 dark:bg-yellow-600'
+  },
+  'Bebidas': {
+    bg: 'bg-blue-100 dark:bg-blue-900/50',
+    text: 'text-blue-600 dark:text-blue-300',
+    tagBg: 'bg-blue-500 dark:bg-blue-600'
+  },
+  'Outros': {
+    bg: 'bg-gray-100 dark:bg-gray-800/50',
+    text: 'text-gray-600 dark:text-gray-300',
+    tagBg: 'bg-gray-500 dark:bg-gray-600'
+  }
+};
+
 const ProdutosDestaque = ({ precos, isLoading = false }) => {
   const carouselRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -184,39 +252,6 @@ const ProdutosDestaque = ({ precos, isLoading = false }) => {
     scrollTimer.current = setTimeout(() => setIsAutoPlaying(true), 2000);
   };
   
-  // Determinando qual categoria um produto pertence com base no nome
-  const getCategoriaIcon = (nome) => {
-    const lowerNome = nome.toLowerCase();
-    
-    if (lowerNome.includes('gasolina') || lowerNome.includes('combustível') || lowerNome.includes('combustivel') || lowerNome.includes('álcool') || lowerNome.includes('alcool') || lowerNome.includes('diesel')) {
-      return (
-        <span className="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 p-1 rounded">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-          </svg>
-        </span>
-      );
-    }
-    
-    if (lowerNome.includes('arroz') || lowerNome.includes('feijão') || lowerNome.includes('feijao') || lowerNome.includes('carne') || lowerNome.includes('leite')) {
-      return (
-        <span className="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 p-1 rounded">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-        </span>
-      );
-    }
-    
-    return (
-      <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-1 rounded">
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-        </svg>
-      </span>
-    );
-  };
-  
   // Se estiver carregando, mostra o skeleton loader
   if (isLoading) {
     return (
@@ -259,14 +294,14 @@ const ProdutosDestaque = ({ precos, isLoading = false }) => {
     >
       {/* Título da seção com estilo melhorado */}
       <div className="mb-4 flex justify-between items-center">
-        <h3 className="text-lg font-bold text-blue-600 dark:text-blue-400 flex items-center">
-          <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Produtos Mais Baratos
         </h3>
-        <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
-          <svg className="h-4 w-4 mr-1 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
           Deslize para ver mais
@@ -291,80 +326,87 @@ const ProdutosDestaque = ({ precos, isLoading = false }) => {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
         >
-          {produtosComMenorPreco.map(({ nome, preco }) => (
-            <Link href={`/preco/${encodeURIComponent(nome.toLowerCase().replace(/\s+/g, '-'))}`} key={nome} passHref>
-              <a className="flex-shrink-0 w-[280px] sm:w-[300px] mx-2 snap-start bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-transparent hover:border-blue-100 dark:hover:border-blue-900 h-[180px]">
-                <div className="relative p-4 flex flex-col h-full">
-                  {/* Tag de categoria no canto superior */}
-                  <div className="absolute -top-1 -right-1 bg-blue-500 dark:bg-blue-600 text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg shadow-md z-10">
-                    {identificarCategoria(nome).toUpperCase()}
-                  </div>
-                  
-                  <div className="flex items-start mb-3">
-                    <h3 className="font-bold text-gray-900 dark:text-white truncate flex-1 mr-2 text-base sm:text-lg">{nome}</h3>
-                    <div className="mt-1">
-                      {getCategoriaIcon(nome)}
+          {produtosComMenorPreco.map(({ nome, preco }) => {
+            const categoria = identificarCategoria(nome);
+            const categoryColor = CATEGORY_COLORS[categoria] || CATEGORY_COLORS['Outros'];
+            
+            return (
+              <Link href={`/preco/${encodeURIComponent(nome.toLowerCase().replace(/\s+/g, '-'))}`} key={nome} passHref>
+                <a className="flex-shrink-0 w-[280px] sm:w-[300px] mx-2 snap-start bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-transparent hover:border-blue-100 dark:hover:border-blue-900 h-[180px]">
+                  <div className="relative p-4 flex flex-col h-full">
+                    {/* Tag de categoria no canto superior */}
+                    <div className={`absolute -top-1 -right-1 ${categoryColor.tagBg} text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg shadow-md z-10`}>
+                      {categoria.toUpperCase()}
                     </div>
-                  </div>
-                  
-                  <div className="flex flex-col justify-between mt-auto">
-                    <div className="mb-2">
-                      <div className="flex items-baseline">
-                        <span className="text-xs text-gray-500 dark:text-gray-400 mr-1">R$</span>
-                        <span className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">
-                          {parseFloat(preco.preco).toFixed(2).replace('.', ',')}
+                    
+                    <div className="flex items-start mb-3">
+                      <h3 className="font-bold text-gray-900 dark:text-white line-clamp-2 flex-1 mr-2 text-base sm:text-lg">{nome}</h3>
+                      <div className="mt-1">
+                        <span className={`${categoryColor.bg} ${categoryColor.text} p-1.5 rounded-full inline-flex items-center justify-center`}>
+                          {CATEGORY_ICONS[categoria] || CATEGORY_ICONS['Outros']}
                         </span>
-                      </div>
-                      <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium truncate mt-1 flex items-center">
-                        <svg className="h-3 w-3 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        {preco.loja}
                       </div>
                     </div>
                     
-                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
-                      <div className="flex items-center">
-                        <svg className="h-3 w-3 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="truncate max-w-[120px]">{preco.bairro}</span>
+                    <div className="flex flex-col justify-between mt-auto">
+                      <div className="mb-2">
+                        <div className="flex items-baseline">
+                          <span className="text-xs text-gray-500 dark:text-gray-400 mr-1 font-medium">R$</span>
+                          <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent">
+                            {parseFloat(preco.preco).toFixed(2).replace('.', ',')}
+                          </span>
+                        </div>
+                        <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium truncate mt-1 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          </svg>
+                          {preco.loja}
+                        </div>
                       </div>
-                      <div className="flex items-center">
-                        <svg className="h-3 w-3 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {tempoRelativo(preco.data)}
+                      
+                      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/30 p-2 rounded-md">
+                        <div className="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className="truncate max-w-[120px]">{preco.bairro}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {tempoRelativo(preco.data)}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </Link>
-          ))}
+                </a>
+              </Link>
+            );
+          })}
         </div>
         
-        {/* Botões de navegação */}
+        {/* Botões de navegação melhorados */}
         {produtosComMenorPreco.length > itemsPerView && (
           <>
             <button 
               onClick={scrollToPrev}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md opacity-70 hover:opacity-100 focus:outline-none transition-all duration-300 z-20 transform hover:scale-110"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2.5 rounded-full shadow-lg opacity-80 hover:opacity-100 focus:outline-none transition-all duration-300 z-20 transform hover:scale-110 hover:bg-blue-50 dark:hover:bg-gray-700"
               aria-label="Anterior"
             >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             
             <button 
               onClick={scrollToNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md opacity-70 hover:opacity-100 focus:outline-none transition-all duration-300 z-20 transform hover:scale-110"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2.5 rounded-full shadow-lg opacity-80 hover:opacity-100 focus:outline-none transition-all duration-300 z-20 transform hover:scale-110 hover:bg-blue-50 dark:hover:bg-gray-700"
               aria-label="Próximo"
             >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </>
