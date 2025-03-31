@@ -109,14 +109,24 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
   if (isLoading) {
     return (
       <div className="relative mx-2 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800 p-4">
-        <div className="flex space-x-4 overflow-x-scroll scrollbar-hide pb-2">
+        <div className="flex space-x-4 overflow-x-scroll scrollbar-hide">
           {[...Array(3)].map((_, index) => (
             <div key={index} className="flex-shrink-0 w-[280px]">
-              <SkeletonLoader 
-                type="preco-card"
-                count={1}
-                className="h-[180px]"
-              />
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 theme-transition">
+                <div className="animate-pulse space-y-4">
+                  <div className="h-5 w-1/3 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                  <div className="h-6 w-3/4 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+                  <div className="h-8 w-1/2 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+                  <div className="flex items-center space-x-2">
+                    <div className="rounded-full bg-gray-200 dark:bg-gray-700 h-4 w-4"></div>
+                    <div className="h-4 w-2/3 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="h-4 w-1/4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    <div className="h-4 w-1/4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -140,7 +150,7 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
       {/* Carrossel */}
       <div 
         ref={carouselRef} 
-        className="flex space-x-4 overflow-x-scroll scrollbar-hide pb-4"
+        className="flex space-x-4 overflow-x-scroll scrollbar-hide"
       >
         {produtosComMenorPreco.map((produto, index) => (
           <div 
@@ -161,9 +171,17 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
                   <p className="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
                     {formatarPreco(produto.preco)}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                    {produto.loja} • {produto.bairro}
-                  </p>
+                  <div className="flex items-center mb-4">
+                    <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-900 rounded-full p-1 mr-2">
+                      <svg className="h-3 w-3 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {produto.loja} • {produto.bairro}
+                    </p>
+                  </div>
                   <div className="mt-auto flex justify-between items-center">
                     <span className="text-xs text-gray-500 dark:text-gray-400">
                       {formatarData(produto.data)}
