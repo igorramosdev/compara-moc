@@ -48,6 +48,17 @@
   }
   
   .form-label {
+
+/* Esconder barra de rolagem em todos os navegadores */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
     @apply block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300;
   }
   

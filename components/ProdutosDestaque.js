@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { formatarPreco, formatarData } from '../utils/formatters';
-import SkeletonLoader from './SkeletonLoader';
 
 const ProdutosDestaque = ({ precos, isLoading }) => {
   const [produtosComMenorPreco, setProdutosComMenorPreco] = useState([]);
@@ -109,21 +108,21 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
   if (isLoading) {
     return (
       <div className="relative mx-2 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800 p-4">
-        <div className="flex space-x-4 overflow-x-scroll scrollbar-hide">
+        <div className="flex space-x-4">
           {[...Array(3)].map((_, index) => (
             <div key={index} className="flex-shrink-0 w-[280px]">
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 theme-transition">
-                <div className="animate-pulse space-y-4">
-                  <div className="h-5 w-1/3 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
-                  <div className="h-6 w-3/4 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
-                  <div className="h-8 w-1/2 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+                <div className="space-y-4">
+                  <div className="h-5 w-1/3 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+                  <div className="h-6 w-3/4 bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse"></div>
+                  <div className="h-8 w-1/2 bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse"></div>
                   <div className="flex items-center space-x-2">
-                    <div className="rounded-full bg-gray-200 dark:bg-gray-700 h-4 w-4"></div>
-                    <div className="h-4 w-2/3 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+                    <div className="rounded-full bg-gray-200 dark:bg-gray-700 h-4 w-4 animate-pulse"></div>
+                    <div className="h-4 w-2/3 bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse"></div>
                   </div>
                   <div className="flex justify-between">
-                    <div className="h-4 w-1/4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                    <div className="h-4 w-1/4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    <div className="h-4 w-1/4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                    <div className="h-4 w-1/4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
                   </div>
                 </div>
               </div>
@@ -146,11 +145,12 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
   }
 
   return (
-    <div className="relative mx-2">
+    <div className="relative mx-2 mb-6">
       {/* Carrossel */}
       <div 
         ref={carouselRef} 
-        className="flex space-x-4 overflow-x-scroll scrollbar-hide"
+        className="flex space-x-4 overflow-x-auto hide-scrollbar pb-4"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {produtosComMenorPreco.map((produto, index) => (
           <div 
@@ -220,8 +220,6 @@ const ProdutosDestaque = ({ precos, isLoading }) => {
           </button>
         </>
       )}
-
-      {/* Indicadores removidos conforme solicitado */}
     </div>
   );
 };
